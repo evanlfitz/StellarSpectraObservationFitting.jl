@@ -1071,7 +1071,7 @@ Use a GP to interpolate `flux_obs` observed at `log_λ_obs` onto `log_λ`
 function _spectra_interp_gp!(fluxes::AbstractVector, log_λ, flux_obs::AbstractVector, var_obs, log_λ_obs; gp_mean::Number=0., gp_base=SOAP_gp, mask_flux::Vector=Array{Bool}(undef, length(flux_obs)), mask_var::Vector=Array{Bool}(undef, length(flux_obs)))
 	mask_var[:] = isfinite.(var_obs)
 	if !any(mask_var)
-		var_obs[.!mask_var] .= 1e6*maximum(var_obs[mask_var])
+		var_obs[.!mask_var] .= 1e6 #*maximum(var_obs[mask_var])
 	end
 	mask_flux[:] = isfinite.(flux_obs)
 	flux_obs[.!mask_flux] .= gp_mean
